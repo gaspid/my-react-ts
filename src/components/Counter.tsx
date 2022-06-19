@@ -1,11 +1,17 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
+import { decrement, increment } from '../redux/todo'
 
 export const Counter = () => {
-  const [count, setCount] = useState(0)
+  const count = useSelector((state: RootState) => state.counter.count)
+  const dispatch = useDispatch()
   return (
     <div>
       <h3>Update the count and edit src/App.tsx, state is preserved</h3>
-      <button onClick={() => setCount((c) => c + 1)}>Count - {count}</button>
+      {count}
+      <button onClick={() => dispatch(increment())}>Count +</button>
+      <button onClick={() => dispatch(decrement())}>Count -</button>
     </div>
   )
 }
